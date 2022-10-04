@@ -5,24 +5,25 @@
             <span class="name">{{product.name}}</span> -
             <span class="price">{{product.price}}</span>
         </li>
-        <button v-on:click="reducePrice">Reduce price</button>
+        <button v-on:click="reducePrice(4)">Reduce price</button>
     </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 export default {
     computed: {
         products() {
             return this.$store.state.products
         },
         saleProducts() {
-        }
+        },
+
     },
     methods: {
-        reducePrice() {
-            this.$store.state.products.forEach(product => {
-                product.price -= -1
-            })
+        reducePrice: function(amount) {
+            this.$store.dispatch('reducePrice', amount)
         }
     }
 }
