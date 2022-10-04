@@ -1,10 +1,11 @@
 <template>
     <div id="product-list-two">
         <h2>Product List Two</h2>
-        <li v-for="product in products" :key="product.price">
+        <li v-for="product in saleProducts" :key="product.price">
             <span class="name">{{product.name}}</span> -
             <span class="price">{{product.price}}</span>
         </li>
+        <button v-on:click="reducePrice">Reduce price</button>
     </div>
 </template>
 
@@ -13,9 +14,19 @@ export default {
     computed: {
         products() {
             return this.$store.state.products
+        },
+        saleProducts() {
+        }
+    },
+    methods: {
+        reducePrice() {
+            this.$store.state.products.forEach(product => {
+                product.price -= -1
+            })
         }
     }
 }
+
 </script>
 
 <style scoped>
